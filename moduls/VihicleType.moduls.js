@@ -1,8 +1,9 @@
 const db = require('../config/config')
 
+
 exports.Create = (data)=>{
     return new Promise((resolve,reject)=>{
-        Query = `INSERT into trip_category set ?`
+        Query = `INSERT into vihicle_type set ?`
         db.query(Query,[data],(err,res)=>{
             if(err){
                 var ErrorMessage = {
@@ -16,11 +17,9 @@ exports.Create = (data)=>{
         })
     })
 }
-
-
 exports.Find = ()=>{
     return new Promise((resolve,reject)=>{
-        Query = `SELECT id,name,icon,active FROM trip_category WHERE is_deleted = '0'`
+        Query = `SELECT  vihicle_type.id as id ,vihicle_type.name as name,vihicle_type.icon as icon,vihicle_type.active as active,trip_category.name as trip_category FROM vihicle_type  join trip_category on vihicle_type.tripcategoryi_id=trip_category.id where vihicle_type.is_deleted = '0'`
         db.query(Query,(err,res)=>{
             if(err){
                 var ErrorMessage = {
@@ -29,15 +28,17 @@ exports.Find = ()=>{
                 reject(ErrorMessage)
             }
             else{
+                data={
+
+                }
                 resolve(res)
             }
         })
     })
 }
-
 exports.FindOne = (id) =>{
     return new Promise((resolve,reject)=>{
-        Query = `SELECT * FROM trip_category WHERE id = ${id} and is_deleted = '0'`
+        Query = `SELECT vihicle_type.id as id,vihicle_type.name as name ,vihicle_type.icon as icon ,vihicle_type.active as active,vihicle_type.tripcategoryi_id as tripcategoryi_id  FROM vihicle_type WHERE id = ${id} and is_deleted = '0'`
         db.query(Query,(err,res)=>{
             if(err){
                 var ErrorMessage = {
@@ -51,10 +52,9 @@ exports.FindOne = (id) =>{
         })
     })
 }
-
 exports.Delete = (id) =>{
     return new Promise((resolve,reject)=>{
-        Query = `Update trip_category SET is_deleted ='1' WHERE id= ${id}`
+        Query = `Update vihicle_type SET is_deleted ='1' WHERE id= ${id}`
         db.query(Query,(err,res)=>{
             if(err){
                 var ErrorMessage = {
@@ -68,10 +68,9 @@ exports.Delete = (id) =>{
         })
     })
 }
-
 exports.Update = (id,data) =>{
     return new Promise((resolve,reject)=>{
-        Query = `Update trip_category SET ? WHERE id= ${id}`
+        Query = `Update vihicle_type SET ? WHERE id= ${id}`
         db.query(Query,[data],(err,res)=>{
             if(err){
                 var ErrorMessage = {

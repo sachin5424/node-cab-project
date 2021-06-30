@@ -38,12 +38,12 @@ exports.trip_category_update = async (req,res) =>{
         }
         else{
             var id = req.params.id;
-           var CreateData = {
-               name:req.body.name,
-               icon:req.body.icon,
-               active:req.body.active 
-           }
-        const data = await trip_category_modules.Update(id,CreateData)
+        //    var CreateData = {
+        //        name:req.body.name,
+        //        icon:req.body.icon,
+        //        active:req.body.active 
+        //    }
+        const data = await trip_category_modules.Update(id,req.body)
         res.status(201).json({
             Data:data
         })

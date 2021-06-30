@@ -1,5 +1,6 @@
 const mysql = require('mysql')
 
+// console.log("ok",dotenv.env.PORT);
 
 const db = mysql.createConnection({
     host:"localhost",
