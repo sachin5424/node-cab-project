@@ -1,20 +1,21 @@
 const mysql = require('mysql')
+const dotenv = require('dotenv');
+dotenv.config();
 
-// console.log("ok",dotenv.env.PORT);
 
 const db = mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"P@ssw0rd",
-    database:"citycabs",
-    port:"3306"
+    host:process.env.DATABASE_HOST,
+    user:process.env.DATABASE_USER ,
+    password:process.env.DATABASE_PASSWORD,
+    database:process.env.DATABASE,
+    port:process.env.DATABASE_PORT,
 })
 db.connect((error)=>{
     if(error){
         console.error("error connecting: "+error);
     }
     else{
-        console.log('connected as mysql');
+        console.log('connected database server');
     }
 })
 
